@@ -43,7 +43,7 @@ void printTileMap(TileMap *map)
     }
 }
 
-void setTileTexture(TileMap *map, unsigned int col, unsigned int row, unsigned int spriteIndex)
+void setTileSprite(TileMap *map, unsigned int col, unsigned int row, unsigned int spriteIndex)
 {
     if(map != NULL && col < map->width && row < map->height)
     {

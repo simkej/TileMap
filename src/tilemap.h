@@ -19,7 +19,7 @@ typedef struct {
 TileMap *createTileMap(unsigned int width, unsigned int height);
 void deleteTileMap(TileMap *map);
 void printTileMap(TileMap *map);
-void setTileTexture(TileMap *map, unsigned int col, unsigned int row, unsigned int spriteIndex);
+void setTileSprite(TileMap *map, unsigned int col, unsigned int row, unsigned int spriteIndex);
 void addTileFlag(TileMap *map, unsigned int col, unsigned int row, unsigned int flags);
 void removeTileFlag(TileMap *map, unsigned int col, unsigned int row, unsigned int flags);
 int tileHasFlag(TileMap *map, unsigned int col, unsigned int row, unsigned int flag);
