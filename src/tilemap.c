@@ -43,6 +43,54 @@ void printTileMap(TileMap *map)
     }
 }
 
+void setTileTexture(TileMap *map, unsigned int col, unsigned int row, unsigned int spriteIndex)
+{
+    if(map != NULL && col < map->width && row < map->height)
+    {
+        map->tiles[row * map->width + col].spriteIndex = spriteIndex;
+    }
+}
+
+void addTileFlag(TileMap *map, unsigned int col, unsigned int row, unsigned int flags)
+{
+    if(map != NULL && col < map->width && row < map->height)
+    {
+        map->tiles[row * map->width + col].flags |= flags;
+    }
+}
+
+void removeTileFlag(TileMap *map, unsigned int col, unsigned int row, unsigned int flags)
+{
+    if(map != NULL && col < map->width && row < map->height)
+    {
+        map->tiles[row * map->width + col].flags &= ~flags;
+    }
+}
+
+int tileHasFlag(TileMap *map, unsigned int col, unsigned int row, unsigned int flag)
+{
+    if(map != NULL && col < map->width && row < map->height)
+    {
+        if(map->tiles[row * map->width + col].flags & flag)
+        {
+            return 1;
+        }
+        return 0;
+    }
+    return -1;
+}
+
+void printTileFlags(TileMap *map, unsigned int col, unsigned int row)
+{
+    if(map != NULL && col < map->width && row < map->height)
+    {
+        if(map->tiles[row * map->width + col].flags & is_solid) printf("is_solid ");
+        if(map->tiles[row * map->width + col].flags & is_burning) printf("is_burning ");
+        if(map->tiles[row * map->width + col].flags & is_pit) printf("is_pit ");
+        printf("\n");
+    }
+}
+
 static Tile getTile(TileMap *map, unsigned int col, unsigned int row)
 {
     if(map != NULL && col < map->width && row < map->height)
@@ -51,3 +99,5 @@ static Tile getTile(TileMap *map, unsigned int col, unsigned int row)
     }
     return (Tile){.spriteIndex = 0, .flags = 0};
 }
+
+
