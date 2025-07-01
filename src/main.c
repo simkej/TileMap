@@ -12,6 +12,10 @@ int main()
             setTileSprite(map, col, row, 5);
         }
     }
+    addTileFlag(map, 5, 5, is_solid | is_burning);
+    removeTileFlag(map, 5, 5, is_solid);
+    if(tileHasFlag(map, 5, 5, is_burning)) printf("Its burning!\n");
+    printTileFlags(map, 5, 5);
     printTileMap(map);
     deleteTileMap(map);
 
