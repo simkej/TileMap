@@ -1,7 +1,7 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -std=c99 -Wall -Wextra 
-LDFLAGS = 
+CFLAGS = -std=c99 -Wall -Wextra `sdl2-config --cflags` -lSDL2_image
+LDFLAGS = `sdl2-config --libs` -lSDL2_image
 
 # Directories
 SRC_DIR = src

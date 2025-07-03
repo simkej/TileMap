@@ -1,22 +1,28 @@
 #include "tilemap.h"
+#include "draw.h"
+#include "input.h"
+#include <SDL2/SDL_events.h>
 #include <stdio.h>
+
+extern int keyboard[MAX_KEYBOARD_KEYS];
 
 int main()
 {
     printf("Hello World!\n");
     TileMap *map = createTileMap(50, 50);
-    for(unsigned int row = 0; row < map->height; row++)
+    initDraw();
+
+    while(1)
     {
-        for(unsigned int col = 0; col < map->width; col++)
-        {
-            setTileSprite(map, col, row, 5);
-        }
+        clearScene();
+
+        doInput();
+
+        if(keyboard[SDL_QUIT]) break;
+
+        presentScene();
     }
-    addTileFlag(map, 5, 5, is_solid | is_burning);
-    removeTileFlag(map, 5, 5, is_solid);
-    if(tileHasFlag(map, 5, 5, is_burning)) printf("Its burning!\n");
-    printTileFlags(map, 5, 5);
-    printTileMap(map);
+    quitDraw();
     deleteTileMap(map);
 
     return 0;
