@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_rect.h>
 
 static SDL_Window *window;
 static SDL_Renderer *renderer;
@@ -68,13 +69,42 @@ void quitDraw()
 
 void drawSprite(unsigned int spriteIndex, unsigned int x, unsigned int y)
 {
+    SDL_Rect source;
+    source.w = TILE_WIDTH;
+    source.h = TILE_HEIGHT;
 
+    if(spriteIndex >= (TILES_PER_ROW * TILE_ROWS))
+    {
+        fprintf(stderr, "spriteIndex out of bounds!\n");
+        return;
+    }
+
+    unsigned int col = spriteIndex % TILES_PER_ROW;
+    unsigned int row = spriteIndex / TILE_ROWS;
+
+    source.x = col * TILE_WIDTH;
+    source.y = row * TILE_HEIGHT;
+
+    SDL_Rect destination;
+    destination.x = x;
+    destination.y = y;
+    destination.w = TILE_WIDTH * TILE_SCALE;
+    destination.h = TILE_HEIGHT * TILE_SCALE;
+
+    SDL_RenderCopy(renderer, spriteSheet, &source, &destination);
 }
 
-// TODO: Implement tile map drawing.
 void drawTileMap(TileMap *map, unsigned int xOffset, unsigned int yOffset)
 {
-
+    for(unsigned int row = 0; row < map->height; row++)
+    {
+        for(unsigned int col = 0; col < map->width; col++)
+        {
+            drawSprite(map->tiles[row * map->width + col].spriteIndex, 
+                       (col * TILE_WIDTH * TILE_SCALE) - (xOffset * TILE_WIDTH * TILE_SCALE), 
+                       (row * TILE_HEIGHT * TILE_SCALE) - (yOffset * TILE_HEIGHT * TILE_SCALE));
+        }
+    }
 }
 
 void clearScene()

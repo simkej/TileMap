@@ -5,6 +5,11 @@
 
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 900
+#define TILE_WIDTH 16
+#define TILE_HEIGHT 16
+#define TILE_ROWS 3
+#define TILES_PER_ROW 3
+#define TILE_SCALE 4
 
 int initDraw();
 void quitDraw();
