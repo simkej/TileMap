@@ -41,7 +41,7 @@ int main()
         if(keyboard[SDL_SCANCODE_RIGHT]) x++;
         if(keyboard[SDL_SCANCODE_LCTRL]) 
         {
-            for(int i = 0; i < map->width; i++)
+            for(unsigned int i = 0; i < map->width; i++)
             {
                 setTileSprite(map, 0+i, 5, 7);
             }

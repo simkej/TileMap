@@ -80,7 +80,7 @@ void drawSprite(unsigned int spriteIndex, unsigned int x, unsigned int y)
     }
 
     unsigned int col = spriteIndex % TILES_PER_ROW;
-    unsigned int row = spriteIndex / TILE_ROWS;
+    unsigned int row = spriteIndex / TILES_PER_ROW;
 
     source.x = col * TILE_WIDTH;
     source.y = row * TILE_HEIGHT;
