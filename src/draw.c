@@ -69,23 +69,17 @@ void quitDraw()
 
 void drawSprite(unsigned int spriteIndex, unsigned int x, unsigned int y)
 {
-    if(spriteSheet == NULL) return;
-
-    SDL_Rect source;
-    source.w = TILE_WIDTH;
-    source.h = TILE_HEIGHT;
-
-    if(spriteIndex >= (TILES_PER_ROW * TILE_ROWS))
+    if(spriteIndex >= (TILES_PER_ROW * TILE_ROWS) || spriteSheet == NULL)
     {
-        fprintf(stderr, "spriteIndex out of bounds!\n");
+        fprintf(stderr, "Failed to draw sprite!\n");
         return;
     }
 
-    unsigned int col = spriteIndex % TILES_PER_ROW;
-    unsigned int row = spriteIndex / TILES_PER_ROW;
-
-    source.x = col * TILE_WIDTH;
-    source.y = row * TILE_HEIGHT;
+    SDL_Rect source;
+    source.x = (spriteIndex % TILES_PER_ROW) * TILE_WIDTH;
+    source.y = (spriteIndex / TILES_PER_ROW) * TILE_HEIGHT;
+    source.w = TILE_WIDTH;
+    source.h = TILE_HEIGHT;
 
     SDL_Rect destination;
     destination.x = x;
