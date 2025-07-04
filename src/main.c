@@ -10,7 +10,7 @@ extern int keyboard[MAX_KEYBOARD_KEYS];
 int main()
 {
     printf("Hello World!\n");
-    TileMap *map = createTileMap(30,30);
+    TileMap *map = createTileMap(30, 30);
 
     for(unsigned int row = 0; row < map->height; row++)
     {

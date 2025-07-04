@@ -69,6 +69,8 @@ void quitDraw()
 
 void drawSprite(unsigned int spriteIndex, unsigned int x, unsigned int y)
 {
+    if(spriteSheet == NULL) return;
+
     SDL_Rect source;
     source.w = TILE_WIDTH;
     source.h = TILE_HEIGHT;
@@ -96,6 +98,8 @@ void drawSprite(unsigned int spriteIndex, unsigned int x, unsigned int y)
 
 void drawTileMap(TileMap *map, unsigned int xOffset, unsigned int yOffset)
 {
+    if(map == NULL) return;
+
     for(unsigned int row = 0; row < map->height; row++)
     {
         for(unsigned int col = 0; col < map->width; col++)
