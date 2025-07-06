@@ -14,16 +14,16 @@ int main()
 
     TileMap *map;
 
-    if(fileExists("maps/test.map"))
+    if(fileExists("maps/test.level"))
     {
-        map = loadTileMap("maps/test.map");
+        map = loadTileMap("maps/test.level");
     } else {
-        map = createTileMap(100, 100);
+        map = createTileMap(50, 50);
         for(unsigned int row = 0; row < map->height; row++)
         {
             for(unsigned int col = 0; col < map->width; col++)
             {
-                setTileSprite(map, col, row, 5);
+                setTileSprite(map, col, row, 3);
             }
         }
     }
@@ -52,7 +52,7 @@ int main()
         presentScene();
         SDL_Delay(16);
     }
-    saveTileMap(map, "maps/test.map");
+    saveTileMap(map, "maps/test.level");
     quitDraw();
     deleteTileMap(map);
 
