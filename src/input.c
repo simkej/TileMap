@@ -1,13 +1,8 @@
-/* 
-
-    TODO: Remake input system.
-
-*/
-
 #include "input.h"
 #include <SDL2/SDL_events.h>
 
-int keyboard[MAX_KEYBOARD_KEYS];
+
+static int keyboard[SDL_NUM_SCANCODES];
 static void doKeyUp(SDL_KeyboardEvent *event);
 static void doKeyDown(SDL_KeyboardEvent *event);
 
@@ -40,7 +35,7 @@ void doInput()
 
 static void doKeyDown(SDL_KeyboardEvent *event)
 {
-    if(event->repeat == 0 && event->keysym.scancode < MAX_KEYBOARD_KEYS)
+    if(event->repeat == 0 && event->keysym.scancode < SDL_NUM_SCANCODES)
     {
         keyboard[event->keysym.scancode] = 1;
     }
@@ -48,8 +43,18 @@ static void doKeyDown(SDL_KeyboardEvent *event)
 
 static void doKeyUp(SDL_KeyboardEvent *event)
 {
-    if(event->repeat == 0 && event->keysym.scancode < MAX_KEYBOARD_KEYS)
+    if(event->repeat == 0 && event->keysym.scancode < SDL_NUM_SCANCODES)
     {
         keyboard[event->keysym.scancode] = 0;
     }
 }
+
+int getKeyDown(int keyCode)
+{
+    if(keyCode >= 0 && keyCode < SDL_NUM_SCANCODES)
+    {
+        return keyboard[keyCode];
+    }
+    return 0;
+}
+
