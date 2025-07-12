@@ -1,16 +1,17 @@
-/* 
-
-    TODO: Remake input system.
-
-*/
-
-
 #ifndef INPUT_H
 #define INPUT_H
 
-#define MAX_KEYBOARD_KEYS 350
+#include <SDL2/SDL_scancode.h>
 
+void initInput();
 void doInput();
+int shouldRun();
+int getKeyDown(SDL_Scancode keyCode);
+int getMouseX();
+int getMouseY();
+int getMouseTileMapX();
+int getMouseTileMapY();
+int getMouseButton(int button);
 
 
 #endif

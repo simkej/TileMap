@@ -3,10 +3,9 @@
 #include "draw.h"
 #include "input.h"
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_scancode.h>
 #include <SDL2/SDL_timer.h>
 #include <stdio.h>
-
-extern int keyboard[MAX_KEYBOARD_KEYS];
 
 int main()
 {
@@ -31,8 +30,12 @@ int main()
     printTileMap(map);
     unsigned int x = 0;
     unsigned int y = 0;
+    unsigned int pallette = 0;
+
+    int rightPressed = 0;
 
     initDraw();
+    initInput();
 
     while(1)
     {
@@ -40,14 +43,27 @@ int main()
 
         doInput();
 
-        if(keyboard[SDL_SCANCODE_DOWN]) y++;
-        if(keyboard[SDL_SCANCODE_UP]) y--;
-        if(keyboard[SDL_SCANCODE_LEFT]) x--;
-        if(keyboard[SDL_SCANCODE_RIGHT]) x++;
+        if(!getMouseButton(SDL_BUTTON_RIGHT)) rightPressed = 0;
+
+        if(getKeyDown(SDL_SCANCODE_W)) y--;
+        if(getKeyDown(SDL_SCANCODE_S)) y++;
+        if(getKeyDown(SDL_SCANCODE_A)) x--;
+        if(getKeyDown(SDL_SCANCODE_D)) x++;
+
+        if(getMouseButton(SDL_BUTTON_LEFT)) setTileSprite(map, getMouseTileMapX() + x, getMouseTileMapY() + y, pallette);
+
+        if(getMouseButton(SDL_BUTTON_RIGHT) && !rightPressed)
+        {
+            pallette++;
+            if(pallette >= TILES_PER_ROW * TILE_ROWS) pallette = 0;
+            printf("%d\n", pallette);
+            rightPressed = 1;
+        }
+
 
         drawTileMap(map, x, y);
 
-        if(keyboard[SDL_QUIT]) break;
+        if(!shouldRun()) break;
 
         presentScene();
         SDL_Delay(16);
