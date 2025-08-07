@@ -17,7 +17,7 @@ int saveTileMap(TileMap *map, char *filename)
         fprintf(stderr, "Couldn't open file!\n");
         return 0;
     }
-    
+
     // Write width and height.
     if(fwrite(&map->width, sizeof(unsigned int), 1, save) != 1 || fwrite(&map->height, sizeof(unsigned int), 1, save) != 1)
     {

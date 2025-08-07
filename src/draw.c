@@ -53,7 +53,7 @@ int initDraw()
 
     // Could be NULL!
     spriteSheet = loadTexture("gfx/spriteSheet.png");
-    
+
 
     return 1;
 }
