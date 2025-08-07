@@ -17,7 +17,7 @@ int main()
     {
         map = loadTileMap("maps/test.level");
     } else {
-        map = createTileMap(50, 50);
+        map = createTileMap(256, 256);
         for(unsigned int row = 0; row < map->height; row++)
         {
             for(unsigned int col = 0; col < map->width; col++)
@@ -27,7 +27,6 @@ int main()
         }
     }
 
-    printTileMap(map);
     unsigned int x = 0;
     unsigned int y = 0;
     unsigned int pallette = 0;
@@ -45,10 +44,10 @@ int main()
 
         if(!getMouseButton(SDL_BUTTON_RIGHT)) rightPressed = 0;
 
-        if(getKeyDown(SDL_SCANCODE_W)) y--;
-        if(getKeyDown(SDL_SCANCODE_S)) y++;
-        if(getKeyDown(SDL_SCANCODE_A)) x--;
-        if(getKeyDown(SDL_SCANCODE_D)) x++;
+        if(getKeyDown(SDL_SCANCODE_W) && y-1 < y) y--;
+        if(getKeyDown(SDL_SCANCODE_S) && y+1 > y) y++;
+        if(getKeyDown(SDL_SCANCODE_A) && x-1 < x) x--;
+        if(getKeyDown(SDL_SCANCODE_D) && x+1 > x) x++;
 
         if(getMouseButton(SDL_BUTTON_LEFT)) setTileSprite(map, getMouseTileMapX() + x, getMouseTileMapY() + y, pallette);
 
@@ -66,7 +65,6 @@ int main()
         if(!shouldRun()) break;
 
         presentScene();
-        SDL_Delay(16);
     }
     saveTileMap(map, "maps/test.level");
     quitDraw();
